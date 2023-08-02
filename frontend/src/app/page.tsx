@@ -2,6 +2,8 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
 import Link from "next/link";
+import Footer from "@/components/Footer";
+
 
 export default function Home() {
   return (
@@ -22,6 +24,7 @@ export default function Home() {
                 hoverTextColor="text-white"
                 hoverBgColor="bg-eBoost-blue"
                 hoverBorderColor="border-eBoost-blue"
+                onClick={() => {}}
               >
                 Predictions
               </Button>
@@ -34,6 +37,7 @@ export default function Home() {
                 hoverTextColor="text-eBoost-blue"
                 hoverBgColor="bg-white"
                 hoverBorderColor="border-eBoost-blue"
+                onClick={() => {}}
               >
                 Logs
               </Button>
@@ -41,11 +45,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <footer className="flex">
-        <a className="flex fixed bottom-0 flex items-center justify-center">
-          &copy; eBoost - {new Date().getFullYear()}
-        </a>
-      </footer>
+      <Footer />
     </main>
   );
 }
