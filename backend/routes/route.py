@@ -15,7 +15,7 @@ with open('model.pkl', 'rb') as file:
 
 
 # GET Request to retrieve logs entered
-@router.get("/")
+@router.get("/get-logs")
 async def get_log():
     logs = serialized_list(collection_name.find())
     return logs

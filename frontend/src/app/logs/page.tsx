@@ -1,5 +1,6 @@
+//@ts-ignore:
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,24 +12,7 @@ import Paper from "@mui/material/Paper";
 import Footer from "@/components/Footer";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
+import { retrieveLogs } from "@/services/logs/LogService";
 
 const style = {
   position: "absolute" as "absolute",
@@ -42,7 +26,20 @@ const style = {
   p: 4,
 };
 
-export default function BasicTable() {
+export default function LogReport() {
+  const [logs, setLogs] = useState<any[]>([]);
+  const transformedLogs = logs.map((log, i) => ({
+    id: i,
+    logs: log,
+  }));
+
+  const handleRetrieveLogs = () => {
+    retrieveLogs().then((response) => setLogs(response.data));
+  };
+  useEffect(() => {
+    handleRetrieveLogs();
+  }, []);
+
   return (
     <main className="font-sans">
       <Navbar />
@@ -60,26 +57,44 @@ export default function BasicTable() {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Dessert (100g serving)</TableCell>
-                <TableCell align="right">Calories</TableCell>
-                <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                <TableCell>UDI</TableCell>
+                <TableCell align="right">Air Temperature</TableCell>
+                <TableCell align="right">Process Temperature</TableCell>
+                <TableCell align="right">Rotational Speed</TableCell>
+                <TableCell align="right">Torque</TableCell>{" "}
+                <TableCell align="right">Tool Wear</TableCell>
+                <TableCell align="right">TWF</TableCell>
+                <TableCell align="right">HDF</TableCell>
+                <TableCell align="right">PWF</TableCell>
+                <TableCell align="right">OSF</TableCell>
+                <TableCell align="right">RNF</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {transformedLogs.map((log: any) => (
                 <TableRow
-                  key={row.name}
+                  key={log.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.name}
+                    {log.logs.UDI}
                   </TableCell>
-                  <TableCell align="right">{row.calories}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
-                  <TableCell align="right">{row.carbs}</TableCell>
-                  <TableCell align="right">{row.protein}</TableCell>
+                  <TableCell align="right">
+                    {log.logs.Air_temperature}
+                  </TableCell>
+                  <TableCell align="right">
+                    {log.logs.Process_temperature}
+                  </TableCell>
+                  <TableCell align="right">
+                    {log.logs.Rotational_speed}
+                  </TableCell>
+                  <TableCell align="right">{log.logs.Torque}</TableCell>
+                  <TableCell align="right">{log.logs.Tool_wear}</TableCell>
+                  <TableCell align="right">{log.logs.TWF}</TableCell>
+                  <TableCell align="right">{log.logs.HDF}</TableCell>
+                  <TableCell align="right">{log.logs.PWF}</TableCell>
+                  <TableCell align="right">{log.logs.OSF}</TableCell>
+                  <TableCell align="right">{log.logs.RNF}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

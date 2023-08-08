@@ -1,5 +1,6 @@
 import "./globals.css";
 import "/dist/output.css";
+import { PredictionProvider } from "./context/PredictionContext";
 
 export const metadata = {
   title: "eBoost - Predictive Maintenance System",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <PredictionProvider>{children}</PredictionProvider>
+      </body>
     </html>
   );
 }
