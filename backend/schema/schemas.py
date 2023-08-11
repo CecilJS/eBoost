@@ -1,3 +1,4 @@
+#schema to serialise logs
 def log_serializer(log) -> dict:
     return {
     "UDI": log["UDI"],
@@ -15,3 +16,13 @@ def log_serializer(log) -> dict:
 
 def serialized_list(logs) -> list:
     return[log_serializer(log) for log in logs]
+
+#schema to serialise predictions
+def pred_serializer(prediction) -> dict:
+    return {
+    "prediction": prediction["prediction"]
+    }
+
+
+def serialized_pred(predictions) -> list:
+    return[pred_serializer(prediction) for prediction in predictions]
