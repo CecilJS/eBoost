@@ -5,7 +5,11 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { logRequest } from "@/services/logs/LogService";
-import { getPrediction } from "@/services/prediction/PredictionService";
+import {
+  getPrediction,
+  getPredictionResults,
+  postPredictionResults,
+} from "@/services/prediction/PredictionService";
 import { useState } from "react";
 import { usePredictionContext } from "@/app/context/PredictionContext";
 
@@ -25,7 +29,6 @@ export default function RequestForm({ onClose }) {
     RNF: "",
   });
   const { prediction, setPrediction } = usePredictionContext();
-  console.log(prediction);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -39,8 +42,9 @@ export default function RequestForm({ onClose }) {
     event.preventDefault();
     logRequest(formData);
     getPrediction(formData).then((response) => {
-      setPrediction(response.data);
+      postPredictionResults(response.data);
     });
+
     onClose();
   };
 

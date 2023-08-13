@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="font-sans">
+    <main className="font-sans background">
       <Navbar />
       <section className="flex h-screen items-center justify-center mb-0">
         <div>

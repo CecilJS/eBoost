@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -8,7 +8,7 @@ import RequestForm from "./RequestForm";
 import Brightness1Icon from "@mui/icons-material/Brightness1";
 import { red, green, grey } from "@mui/material/colors";
 import { usePredictionContext } from "@/app/context/PredictionContext";
-import Cookies from "js-cookie";
+import { getPredictionResults } from "@/services/prediction/PredictionService";
 
 const style = {
   position: "absolute",
@@ -22,37 +22,28 @@ const style = {
   p: 4,
 };
 
-export default function LogModal() {
+export default function LogModal({ cardId }) {
   const [open, setOpen] = useState(false);
   const [openSecondModal, setOpenSecondModal] = useState(false);
   const { prediction, setPrediction } = usePredictionContext();
+
+  // Event handlers for the modal open and close functionality
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleOpenSecondModal = () => setOpenSecondModal(true);
   const handleCloseSecondModal = () => setOpenSecondModal(false);
 
-  // Get the actual prediction set as a cookie
-  useEffect(() => {
-    // Check if the code is running on the frontend
-    if (typeof window !== "undefined") {
-      // Store the expiry date in a variable
-      const oneWeekFromNow = new Date();
-      oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
-
-      Cookies.set("prediction", prediction.prediction, {
-        expires: oneWeekFromNow,
-      });
-    }
-  }, [prediction]);
-
-  const currentPrediction = Number(Cookies?.get("prediction"));
+  // Fetch latest prediction results from db and store in context
+  getPredictionResults().then((response) => {
+    setPrediction(response.data);
+  });
 
   // Dynamically set the color representing the device health based on the prediction received from the model
 
   let color;
-  if (currentPrediction === 1) {
+  if (prediction?.prediction === 1) {
     color = green[500];
-  } else if (currentPrediction === 0) {
+  } else if (prediction?.prediction === 0) {
     color = red[500];
   } else {
     color = grey[500];

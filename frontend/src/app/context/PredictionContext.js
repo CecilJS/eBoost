@@ -1,10 +1,10 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
-const PredictionContext = createContext({ prediction: 0 });
+const PredictionContext = createContext(null);
 
 export const PredictionProvider = ({ children }) => {
-  const [prediction, setPrediction] = useState({ prediction: -1 });
+  const [prediction, setPrediction] = useState(null);
 
   return (
     <PredictionContext.Provider value={{ prediction, setPrediction }}>

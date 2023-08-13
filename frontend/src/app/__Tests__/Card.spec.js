@@ -3,10 +3,10 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import Card from "../../components/Card";
 import "@testing-library/jest-dom";
-import { describe, it, expect } from "@jest/globals"; // Reordered 'expect'
+import { describe, it, expect } from "@jest/globals";
 
 const mockLogModal = jest.fn();
-jest.mock("../../components/Modal", () => (props) => {
+jest.mock("../../components/LogModal", () => (props) => {
   mockLogModal(props);
   return <mock-LogModal />;
 });
