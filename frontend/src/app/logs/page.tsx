@@ -58,16 +58,36 @@ export default function LogReport() {
             <TableHead>
               <TableRow>
                 <TableCell>UDI</TableCell>
-                <TableCell align="right">Air Temperature</TableCell>
-                <TableCell align="right">Process Temperature</TableCell>
-                <TableCell align="right">Rotational Speed</TableCell>
-                <TableCell align="right">Torque</TableCell>{" "}
-                <TableCell align="right">Tool Wear</TableCell>
-                <TableCell align="right">TWF</TableCell>
-                <TableCell align="right">HDF</TableCell>
-                <TableCell align="right">PWF</TableCell>
-                <TableCell align="right">OSF</TableCell>
-                <TableCell align="right">RNF</TableCell>
+                <TableCell align="right" data-cy="Air Temperature">
+                  Air Temperature
+                </TableCell>
+                <TableCell align="right" data-cy="Process Temperature">
+                  Process Temperature
+                </TableCell>
+                <TableCell align="right" data-cy="Rotational Speed">
+                  Rotational Speed
+                </TableCell>
+                <TableCell align="right" data-cy="Torque">
+                  Torque
+                </TableCell>{" "}
+                <TableCell align="right" data-cy="Tool Wear">
+                  Tool Wear
+                </TableCell>
+                <TableCell align="right" data-cy="TWF">
+                  TWF
+                </TableCell>
+                <TableCell align="right" data-cy="HDF">
+                  HDF
+                </TableCell>
+                <TableCell align="right" data-cy="PWF">
+                  PWF
+                </TableCell>
+                <TableCell align="right" data-cy="OSF">
+                  OSF
+                </TableCell>
+                <TableCell align="right" data-cy="RNF">
+                  RNF
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

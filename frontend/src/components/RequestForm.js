@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import { logRequest } from "@/services/logs/LogService";
 import {
   getPrediction,
-  getPredictionResults,
   postPredictionResults,
 } from "@/services/prediction/PredictionService";
 import { useState } from "react";
@@ -28,7 +27,8 @@ export default function RequestForm({ onClose }) {
     OSF: "",
     RNF: "",
   });
-  const { prediction, setPrediction } = usePredictionContext();
+
+  const { hasPosted, setHasPosted } = usePredictionContext();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -43,6 +43,7 @@ export default function RequestForm({ onClose }) {
     logRequest(formData);
     getPrediction(formData).then((response) => {
       postPredictionResults(response.data);
+      setHasPosted(true);
     });
 
     onClose();
@@ -58,8 +59,10 @@ export default function RequestForm({ onClose }) {
       autoComplete="off"
     >
       <div>
-        <Typography variant="h4">Machine Status Check Form</Typography>
-        <Typography variant="body1">
+        <Typography variant="h4" data-cy="Modal_heading">
+          Machine Status Check Form
+        </Typography>
+        <Typography variant="body1" data-cy="Modal_description">
           Please enter the current readings into the following fields to receive
           the health of this machine
         </Typography>
@@ -75,6 +78,7 @@ export default function RequestForm({ onClose }) {
           name="UDI"
           value={formData.UDI}
           onChange={handleInputChange}
+          data-cy="Modal_UDI"
         />
         <TextField
           required
@@ -84,6 +88,7 @@ export default function RequestForm({ onClose }) {
           name="Air_temperature"
           value={formData.Air_temperature}
           onChange={handleInputChange}
+          data-cy="Modal_Air_Temperature"
         />
         <TextField
           required
@@ -93,6 +98,7 @@ export default function RequestForm({ onClose }) {
           name="Process_temperature"
           value={formData.Process_temperature}
           onChange={handleInputChange}
+          data-cy="Modal_Process_Temperature"
         />
         <TextField
           required
@@ -102,6 +108,7 @@ export default function RequestForm({ onClose }) {
           name="Rotational_speed"
           value={formData.Rotational_speed}
           onChange={handleInputChange}
+          data-cy="Modal_Rotational_speed"
         />
         <TextField
           required
@@ -111,6 +118,7 @@ export default function RequestForm({ onClose }) {
           name="Torque"
           value={formData.Torque}
           onChange={handleInputChange}
+          data-cy="Modal_Torque"
         />
         <TextField
           required
@@ -120,6 +128,7 @@ export default function RequestForm({ onClose }) {
           name="Tool_wear"
           value={formData.Tool_wear}
           onChange={handleInputChange}
+          data-cy="Modal_Tool_Wear"
         />
         <TextField
           required
@@ -129,6 +138,7 @@ export default function RequestForm({ onClose }) {
           name="TWF"
           value={formData.TWF}
           onChange={handleInputChange}
+          data-cy="Modal_TWF"
         />
         <TextField
           required
@@ -138,6 +148,7 @@ export default function RequestForm({ onClose }) {
           name="HDF"
           value={formData.HDF}
           onChange={handleInputChange}
+          data-cy="Modal_HDF"
         />
         <TextField
           required
@@ -147,6 +158,7 @@ export default function RequestForm({ onClose }) {
           name="PWF"
           value={formData.PWF}
           onChange={handleInputChange}
+          data-cy="Modal_PWF"
         />
         <TextField
           required
@@ -156,6 +168,7 @@ export default function RequestForm({ onClose }) {
           name="OSF"
           value={formData.OSF}
           onChange={handleInputChange}
+          data-cy="Modal_OSF"
         />
         <TextField
           required
@@ -165,6 +178,7 @@ export default function RequestForm({ onClose }) {
           name="RNF"
           value={formData.RNF}
           onChange={handleInputChange}
+          data-cy="Modal_RNF"
         />
       </div>
       <br />

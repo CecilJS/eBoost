@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -26,6 +26,7 @@ export default function LogModal({ cardId }) {
   const [open, setOpen] = useState(false);
   const [openSecondModal, setOpenSecondModal] = useState(false);
   const { prediction, setPrediction } = usePredictionContext();
+  const { hasPosted, setHasPosted } = usePredictionContext();
 
   // Event handlers for the modal open and close functionality
   const handleOpen = () => setOpen(true);
@@ -33,10 +34,14 @@ export default function LogModal({ cardId }) {
   const handleOpenSecondModal = () => setOpenSecondModal(true);
   const handleCloseSecondModal = () => setOpenSecondModal(false);
 
-  // Fetch latest prediction results from db and store in context
-  getPredictionResults().then((response) => {
-    setPrediction(response.data);
-  });
+  useEffect(() => {
+    // Fetch latest prediction results from db and store in context
+
+    getPredictionResults().then((response) => {
+      setPrediction(response.data);
+      console.log(prediction);
+    });
+  }, [hasPosted]);
 
   // Dynamically set the color representing the device health based on the prediction received from the model
 
@@ -51,9 +56,13 @@ export default function LogModal({ cardId }) {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Check Status</Button>
+      <Button onClick={handleOpen} data-cy="check_status">
+        Check Status
+      </Button>
       <Brightness1Icon sx={{ color: { color } }} fontSize="small" />
-      <Button onClick={handleOpenSecondModal}>Tips</Button>
+      <Button onClick={handleOpenSecondModal} data-cy="tips">
+        Tips
+      </Button>
 
       <Modal
         open={open}

@@ -12,7 +12,7 @@ export const logRequest = (data) => {
 
 export const retrieveLogs = () => {
   const baseURL = "http://localhost:8000/";
-  const logsEndpoint = "get-logs";
+  const logsEndpoint = "get_logs";
 
   return axios
     .get(`${baseURL}${logsEndpoint}`)

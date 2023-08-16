@@ -11,7 +11,10 @@ export default function Home() {
       <Navbar />
       <section className="flex h-screen items-center justify-center mb-0">
         <div>
-          <h1 className="text-6xl font-bold text-eBoost-blue shadow-xl py-4 px-4">
+          <h1
+            className="text-6xl font-bold text-eBoost-blue shadow-xl py-4 px-4"
+            data-cy="landing_page_heading"
+          >
             Maintainence Made Easy
           </h1>
           <hr />
@@ -25,6 +28,7 @@ export default function Home() {
                 hoverBgColor="bg-eBoost-blue"
                 hoverBorderColor="border-eBoost-blue"
                 onClick={() => {}}
+                dataCy="landing_page_prediction_btn"
               >
                 Predictions
               </Button>
@@ -38,6 +42,7 @@ export default function Home() {
                 hoverBgColor="bg-white"
                 hoverBorderColor="border-eBoost-blue"
                 onClick={() => {}}
+                dataCy="landing_page_logs_btn"
               >
                 Logs
               </Button>

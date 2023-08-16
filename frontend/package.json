@@ -9,7 +9,8 @@
     "lint": "next lint",
     "cypress": "cypress open",
     "cy:headless": "cypress run",
-    "clear-cache": "jest --clearCache"
+    "clear-cache": "jest --clearCache",
+    "test": "jest --watch"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",

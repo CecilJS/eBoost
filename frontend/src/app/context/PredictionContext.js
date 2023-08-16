@@ -5,9 +5,12 @@ const PredictionContext = createContext(null);
 
 export const PredictionProvider = ({ children }) => {
   const [prediction, setPrediction] = useState(null);
+  const [hasPosted, setHasPosted] = useState(false);
 
   return (
-    <PredictionContext.Provider value={{ prediction, setPrediction }}>
+    <PredictionContext.Provider
+      value={{ prediction, setPrediction, hasPosted, setHasPosted }}
+    >
       {children}
     </PredictionContext.Provider>
   );

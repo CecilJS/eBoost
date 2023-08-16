@@ -19,7 +19,7 @@ with open('model.pkl', 'rb') as file:
 
 
 # GET Request to retrieve logs entered
-@router.get("/get-logs")
+@router.get("/get_logs")
 async def get_log():
     logs = serialized_list(eboost.find())
     return logs
@@ -59,3 +59,7 @@ async def prediction_function(body: Item):
    df= pd.DataFrame([body.dict().values()], columns=body.dict().keys())
    yhat = model.predict(df)
    return { "prediction": int(yhat) }
+
+
+
+
